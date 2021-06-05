@@ -1,0 +1,49 @@
+.card{
+    &__container{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 2rem;
+    }
+    &__content{
+        margin-top: 3rem;
+    }
+    &__image{
+        width: 80%;
+        height: 27rem;
+        background-repeat: no-repeat;
+        background-size: cover;
+        transition: all 2 ease-in;
+
+        &:hover{
+            opacity: 75%;
+        }
+    }
+    &__discription{
+        margin-top: .6rem;
+        font-size: 1.6rem;
+        font-weight: 300;
+        text-decoration: none;
+    }
+    &__link{
+        &:visited,
+        &:link{
+           color: $color-white;
+           text-decoration: none;
+        }
+        &:hover{
+           color: $color-gray-400;
+        }
+    }
+
+}
+
+.data{
+    display: flex;
+    align-items: center;
+    color: $color-gray-300;
+    font-size: 1.4rem;
+
+    &__discription{
+        color: $color-gray-300;
+    }
+}

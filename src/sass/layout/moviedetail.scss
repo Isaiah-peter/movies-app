@@ -1,0 +1,125 @@
+.movie-info{
+    display: flex;
+    padding: 5rem 0;
+    border-bottom: .1rem solid $color-gray-800;
+
+    &__image{
+        width: 24rem;
+        height: 40rem;
+        flex: 0 0 25%;
+    }
+    &__details{
+        margin-left: 8rem;
+        flex: 1;
+        font-size: 1.4rem;
+        color: $color-gray-300;
+    }
+    &__header{
+        margin-bottom: 2.5rem;
+    }
+    &__header-name{
+        font-size: 2.5rem;
+        margin-bottom: .5rem;
+    }
+    &__header-name-detail{
+        font-size: 1.4rem;
+        font-weight: 100;
+        color: $color-gray-300;
+    }
+    &__detail{
+        font-size: 1.2rem;
+    }
+}
+.feature{
+    margin: 6rem 0;
+
+    &__header{
+        font-size: 1.4rem;
+        margin-bottom: 2rem;
+    }
+    &__info{
+        display: flex;
+        justify-content: space-between;
+        width: 25rem;
+        font-weight: 100;
+
+        &-header{
+          width: 300;
+          font-size: 1.3rem;
+          margin-bottom: .3rem ;
+        }
+    }
+}
+.thriller{
+    &:visited,
+    &:link{
+        text-decoration: none;
+        color: black;
+        transition: all .2s;
+    }
+    &:hover{
+        background-color: darken($color-yellow-500 , 20%) 
+    }
+}
+.play-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 1.5rem;
+    background-color: $color-yellow-500;
+    font-size: 1.4rem;
+    font-weight: 600;
+    box-shadow: 0 1.5rem 4rem rgba($color-gray-800,.2);
+    border-radius: .3rem;
+    width: 20%;
+    &-icon{
+        width: 2rem;
+        height: 2rem;
+        margin-right: .5rem;
+    }
+}
+
+.play-cast{
+    padding-top: 5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+     
+    &__box{
+        width: 80%;
+        height: 40rem;
+    }
+    &__image{
+        width: 100%;
+        height: 80%;
+        border-radius: .3rem;
+    }
+    &__header{
+        font-size: 2.5rem;
+        font-weight: 400;
+    }
+    &__detail{
+        margin-top: 1rem;
+    }
+    &__name{
+        font-size: 1.7rem;
+        color: $color-gray-300;
+    }
+    &__nameR{
+        font-size: 2rem;
+    }
+
+}
+.image-cast{
+    padding-top: 5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    &__box{
+        width: 90%;
+        height: 18rem;
+    }
+    &__image{
+        width: 90%;
+        height: 100%;
+    }
+}

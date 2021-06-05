@@ -1,0 +1,93 @@
+.navbar{
+    width: 100%;
+    padding: 2rem  0;
+    border-bottom: .1rem solid $color-gray-800;
+    display: flex;
+    justify-content: space-between;
+  
+
+    &__app-detail{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 4rem;
+    }
+    &-logo{
+        width: 2.8rem;
+        height: 2.8rem;
+        margin-right: .4rem;
+    }
+
+    &-list>nav{
+        font-size: 1.6rem;
+       
+    
+    }
+    &-items{
+       display: flex;
+    }
+    &-item{
+        list-style: none;
+        
+    }
+    &-item>a{
+        &:visited,
+        &:link{
+            text-decoration: none ;
+            margin-right: 2rem;
+            color: $color-white;
+        }
+
+        &:hover{
+            color: $color-gray-300;
+        }
+    }
+
+    &__search{
+        margin-right: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__input{
+        width: 20rem;
+        border: none;
+        outline: none;
+        font-size: 1.6rem;
+        border-radius: 20rem;
+        margin-right: 2rem;
+        padding: .6rem 2.5rem;
+        background-color: $color-gray-800;
+        color: $color-white;
+    }
+
+    &__form{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+}
+.app-name-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10rem;
+
+    &:hover{
+        color: $color-gray-300;
+    }
+}
+.user{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+}
+.search-icon{
+    height: 2.9rem;
+    width: 2.9rem;
+    background-color: $color-gray-800;
+    border-radius: 100%;
+    margin-right: -2.5rem;
+    z-index: 1;
+}
