@@ -13,4 +13,16 @@
     html{
       font-size: 63.5%;
       width: 100%;
+      @include respond(tab-land){
+        font-size: 56.9%;
+      }
+      @include respond(tab-port){
+        font-size: 50%; //1rem = 8px 8/16
+      }
+      @include respond(phone){
+        font-size: 40%; //1rem = 8px 8/16
+      }
+      @include respond(big-laptop){
+        font-size: 75%;
+      }
     }

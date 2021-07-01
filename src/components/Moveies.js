@@ -2,7 +2,7 @@ import React from 'react'
 
 
 
-export const MoviesApp = ({ movies, genres, onGetImageId}) => {
+export const MoviesApp = ({ movies, genres}) => {
  const getGenres = (ids) => {
     let result = [];
     if(ids === ''){
@@ -21,13 +21,13 @@ export const MoviesApp = ({ movies, genres, onGetImageId}) => {
    
     return (
       <div  key={movie.id} className='card__content'>
-        <a onClick={()=>onGetImageId(movie.id)} href='/moviedetail'>
-          <img className='card__image' src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt='text image' />
+        <a href={`/moviedetail/${movie.id}`}>
+          <img className='card__image' src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt='text' />
         </a>
         <div className="card__discription">
-          <a onClick={()=>onGetImageId(movie.id)} h   href="/moviedetail" className='card__link'>{movie.original_title}</a>
+          <a href={`/moviedetail/${movie.id}`} className='card__link'>{movie.original_title}</a>
           <div className='data mt-1'>
-            <span>⭐ </span>
+            <span>⭐</span>
             <span className='mr-2'>{Math.floor(movie.popularity * 100 / 10000)}%</span>
             <span>|</span>
             <span className='ml-2'>{movie.release_date}</span>
