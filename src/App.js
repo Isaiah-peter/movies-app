@@ -19,10 +19,6 @@ class App extends React.Component {
     movieDetailData:[]
   }
 
-   movieDetail = async(movie_id) => {
-    const response = await moviedb.get(`/movie/${movie_id}`)
-    this.setState({movieDetailData:response.data.genres})
-  }
   
   componentDidMount = () => {
     const movieDataB = async() => {
@@ -36,12 +32,9 @@ class App extends React.Component {
       this.setState({genres:response.data.genres})
     }
     
-
-      
-    
-    this.movieDetail()
     movieDataB()
     movieDataGenre()
+    
   }
 
  
@@ -53,11 +46,9 @@ class App extends React.Component {
         <Navbar />
         <Switch>
         <Route exact path='/' >
-         <MoviesApp movies={this.state.popularMovies} onGetImageId={this.movieDetail}  genres={this.state.genres} />
+         <MoviesApp movies={this.state.popularMovies}  genres={this.state.genres} />
         </Route>
-        <Route exact path='/moviedetail' >
-         <MoviesDetail  />
-        </Route>
+        <Route exact path='/moviedetail/:id' component={MoviesDetail}  genres={this.state.genres} />
         </Switch>
   
       </Router>
