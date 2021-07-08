@@ -7,17 +7,10 @@ export const MoviesDetail = (props) => {
     const [detail, setDetail] = useState({})
     const [cast, setCast] = useState({})
     const [currentCast, setCurrentCast] = useState(0)
+    const [castImage, setCastImage] = useState([])
 
 
-    useEffect(() =>{ 
-      getDetail()
-      window.setTimeout(()=>{
-        setCurrentCast(currentCast + 1)
-        if(currentCast === 20){
-          setCurrentCast(0)
-        }
-      },2000)
-      getCast()}, [detail])
+    
       const getDetail = async() => {
       const Id = props.match.params.id;
       const response = await moviedb.get(`/movie/${Id}`)
@@ -29,8 +22,18 @@ export const MoviesDetail = (props) => {
       const Id = props.match.params.id;
       const response = await moviedb.get(`/movie/${Id}/credits`)
       setCast(response.data.cast[currentCast])
-      console.log(response.data.cast)
+      setCastImage(response.data.cast)
     }
+
+    useEffect(() =>{ 
+      getDetail()
+      window.setTimeout(()=>{
+        setCurrentCast(currentCast + 1)
+        if(currentCast == 20){
+          setCurrentCast(0)
+        }
+      },2000)
+      getCast()}, [detail])
 
     const getGenres = () => {
       let result = [];
@@ -62,6 +65,20 @@ export const MoviesDetail = (props) => {
       }
     }
 
+   
+      const renderCastImage = castImage.map((image)=>{
+            return(
+              <div className='play-cast__box'>
+              <img src={`https://image.tmdb.org/t/p/w500/${image.profile_path}`} alt='cast' className='play-cast__image'/>
+              <div className='play-cast__detail'>
+              <h2 className='play-cast__nameR'>{image.name}</h2>
+              <h4 className='play-cast__name'>{image.character}</h4>
+              </div>
+          </div>
+            )
+          })
+      
+    
   
     return(
       <div className='p5'>
@@ -94,13 +111,7 @@ export const MoviesDetail = (props) => {
        
        <h2 className='play-cast__header'>Cast</h2>
       <div className='play-cast'>
-         <div className='play-cast__box'>
-          <img src={user} alt='cast' className='play-cast__image'/>
-          <div className='play-cast__detail'>
-              <h2 className='play-cast__nameR'>your name</h2>
-              <h4 className='play-cast__name'>Jerry</h4>
-          </div>
-         </div>
+          {renderCastImage}
        </div>
       </div>
 
