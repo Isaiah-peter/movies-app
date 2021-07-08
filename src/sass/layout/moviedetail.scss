@@ -3,6 +3,10 @@
     padding: 5rem 0;
     border-bottom: .1rem solid $color-gray-800;
 
+    @include respond(phone){
+        display: block;
+    }
+
     &__image{
         width: 24rem;
         height: 40rem;
@@ -13,6 +17,11 @@
         flex: 1;
         font-size: 1.4rem;
         color: $color-gray-300;
+
+        @include respond(phone){
+            margin-left: 0 ;
+            width: 80%;
+        }
     }
     &__header{
         margin-bottom: 2.5rem;
@@ -42,6 +51,8 @@
         justify-content: space-between;
         width: 25rem;
         font-weight: 100;
+
+        
 
         &-header{
           width: 300;
@@ -85,6 +96,12 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     
+    @include respond(tab-port){
+        grid-template-columns: repeat(3, 1fr); 
+    }
+    @include respond(phone){
+        grid-template-columns: repeat(1, 1fr); 
+    }
      
     &__box{
         width: 80%;
