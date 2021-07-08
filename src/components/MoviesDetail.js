@@ -6,10 +6,17 @@ import moviedb from '../api/moviesapi'
 export const MoviesDetail = (props) => {
     const [detail, setDetail] = useState({})
     const [cast, setCast] = useState({})
+    const [currentCast, setCurrentCast] = useState(0)
 
 
     useEffect(() =>{ 
       getDetail()
+      window.setTimeout(()=>{
+        setCurrentCast(currentCast + 1)
+        if(currentCast === 20){
+          setCurrentCast(0)
+        }
+      },2000)
       getCast()}, [detail])
       const getDetail = async() => {
       const Id = props.match.params.id;
@@ -21,8 +28,8 @@ export const MoviesDetail = (props) => {
     const getCast = async() => {
       const Id = props.match.params.id;
       const response = await moviedb.get(`/movie/${Id}/credits`)
-      setCast(response.data)
-      console.log(response.data)
+      setCast(response.data.cast[currentCast])
+      console.log(response.data.cast)
     }
 
     const getGenres = () => {
@@ -41,32 +48,17 @@ export const MoviesDetail = (props) => {
     }
 
     const getCastdata = () =>{
-      if(cast.original_name){
-        cast.map((item)=>{
+      if(cast){
           return(
             <div className='feature__info'>
           <div>
-            <div className='feature__info-header'>{item.cast.character}</div>
+            <div className='feature__info-header'>{cast.character}</div>
           </div>
           <div>
-            <div className='feature__info-header'>{item.cast.original_name}</div>
+            <div className='feature__info-header'>{cast.original_name}</div>
           </div>
         </div>
           )
-        })
-      }else{
-        return(
-          <div className='feature__info'>
-        <div>
-          <div className='feature__info-header'>john</div>
-    
-        </div>
-        <div>
-          <div className='feature__info-header'>willims</div>
-         
-        </div>
-      </div>
-        )
       }
     }
 

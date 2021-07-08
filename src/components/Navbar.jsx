@@ -20,8 +20,10 @@ export class Navbar extends React.Component {
 
     ul.classList.add('show')
     close.classList.add('cancel')
+  }
 
-
+  con(){
+    console.log('rtt')
   }
 
   render() {
@@ -45,7 +47,7 @@ export class Navbar extends React.Component {
               </nav>
             </div>
             <div className='navbar__search'>
-              <form onSubmit={this.hide} className='navbar__form'>
+              <form onSubmit={this.hide,this.con} className='navbar__form'>
                 <img className='search-icon' alt='search' src={search} />
                 <input className='navbar__input' type="text" placeholder='search...' />
               </form>
