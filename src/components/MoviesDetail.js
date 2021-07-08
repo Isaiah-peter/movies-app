@@ -67,15 +67,17 @@ export const MoviesDetail = (props) => {
 
    
       const renderCastImage = castImage.map((image)=>{
-            return(
-              <div className='play-cast__box'>
-              <img src={`https://image.tmdb.org/t/p/w500/${image.profile_path}`} alt='cast' className='play-cast__image'/>
-              <div className='play-cast__detail'>
-              <h2 className='play-cast__nameR'>{image.name}</h2>
-              <h4 className='play-cast__name'>{image.character}</h4>
-              </div>
-          </div>
-            )
+            if(image){
+              return(
+                <div className='play-cast__box'>
+                <img src={`https://image.tmdb.org/t/p/w500/${image.profile_path}`} alt='cast' className='play-cast__image'/>
+                <div className='play-cast__detail'>
+                <h2 className='play-cast__nameR'>{image.name}</h2>
+                <h4 className='play-cast__name'>{image.character}</h4>
+                </div>
+            </div>
+              )
+            }
           })
       
     
