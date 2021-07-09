@@ -131,13 +131,19 @@
 .image-cast{
     padding-top: 5rem;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    @include respond(tab-port){
+        grid-template-columns: repeat(3, 1fr); 
+    }
+    @include respond(phone){
+        grid-template-columns: repeat(1, 1fr); 
+    }
     &__box{
         width: 90%;
-        height: 18rem;
+        height: 40rem;
     }
     &__image{
-        width: 90%;
-        height: 100%;
+        width: 100%;
+        height: 800%;
     }
 }
