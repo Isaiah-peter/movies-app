@@ -1,0 +1,28 @@
+.paginationBtn{
+    width: 80%;
+    height: 4rem;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+
+    & a{
+      padding: 1rem;
+      margin: .8rem;
+      border-radius: .3rem;
+      border: 1px solid #2b2eff;
+      color :#fff;
+      cursor: pointer;
+
+      &:hover{
+          background-color: #2b2eff;
+          box-shadow: 0 1rem 4rem #2b2eff;
+      }
+      &:focus{
+          background-color: #2b2eff;
+          box-shadow: 0 1rem 4rem #2b2eff;
+    
+      }
+    }
+}
+
