@@ -60,6 +60,45 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+        &-output{
+            position: absolute;
+            background-color: $color-gray-800;
+            border-radius: .3rem;
+            right: 6%;
+            top: 7%;
+            width: 24rem;
+            font-size: 1.6rem;
+
+            @include respond(tab-port){
+            width: 100%;
+             right: 0%;
+             top: 23%;
+            }
+            @include respond(phone){
+                width: 100%;
+                right: 0%;
+                top: 35%;
+               }
+
+            &-list{
+                border-bottom: 1px solid $color-gray-400;
+                list-style: none;
+                padding: 1rem;
+            }
+            &-link{
+                &,
+                &:visited,
+                &:link{
+                    color: $color-white;
+                    text-decoration: none;
+                }
+
+                &:hover{
+                    color: $color-yellow-500;
+                }
+            }
+        }
     }
     &__input{
         width: 20rem;
