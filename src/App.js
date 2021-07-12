@@ -9,6 +9,7 @@ import {
 
 } from "react-router-dom";
 import moviedb from './api/moviesapi'
+import { Actors} from './components/actors'
 
 
 class App extends React.Component {
@@ -49,6 +50,7 @@ class App extends React.Component {
          <MoviesApp movies={this.state.popularMovies}  genres={this.state.genres} />
         </Route>
         <Route exact path='/moviedetail/:id' component={MoviesDetail}  genres={this.state.genres} />
+        <Route exact path='/actors' component={Actors} />
         </Switch>
   
       </Router>

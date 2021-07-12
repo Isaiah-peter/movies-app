@@ -7,7 +7,7 @@ import Paginate from "react-paginate";
 export const MoviesDetail = (props) => {
   const [detail, setDetail] = useState({})
   const [cast, setCast] = useState({})
-  const [currentCast] = useState(0)
+  const [currentCast ,setCurrentCast] = useState(0)
   const [castImage, setCastImage] = useState([])
   const [pageNumber, setPageNumber] = useState(0)
   const [crewImage, setCrewImage] = useState([])
@@ -21,11 +21,9 @@ export const MoviesDetail = (props) => {
   const visitedPage = pageNumber * userPerpage
   const crewVisitedPage = pageCrewNumber * userPerpage
 
-
-
   const getDetail = async () => {
     const Id = props.match.params.id;
-    const response = await moviedb.get(`/movie/${Id}`)
+    const response = await moviedb.get(`/movie/${Id}?&append_to_response=videos`)
     setDetail(response.data)
 
   }
@@ -42,13 +40,16 @@ export const MoviesDetail = (props) => {
 
   useEffect(() => {
     getDetail()
-    
+    setCurrentCast(currentCast + 1)
+      if(currentCast === castImage.length){
+        setCurrentCast(0)
+      }
     getCast()
-  }, [detail])
+    
+  }, [])
 
   const getGenres = () => {
     let result = [];
-
     if (detail.genres) {
       detail.genres.map((item) => {
         result.push(item.name)
@@ -56,8 +57,6 @@ export const MoviesDetail = (props) => {
     } else {
       result.push('genres')
     }
-
-
     return result.join(',')
   }
 
@@ -81,7 +80,7 @@ export const MoviesDetail = (props) => {
     .map((image) => {
       if (image) {
         return (
-          <div key={image.name === undefined ? Math.random(): image.name} className='play-cast__box'>
+          <div key={image.cast_id === undefined ? Math.random(): image.cast_id} className='play-cast__box'>
             <img src={image.profile_path === null ? user:`https://image.tmdb.org/t/p/w500/${image.profile_path}`} alt='cast' className='play-cast__image' />
             <div className='play-cast__detail'>
               <h2 className='play-cast__nameR'>{image.name}</h2>
@@ -95,7 +94,7 @@ export const MoviesDetail = (props) => {
     const renderCrew = crewImage.slice(crewVisitedPage, crewVisitedPage + userPerpage)
     .map((image)=>{
       return (
-      <div key={image.name === undefined ? Math.random(): image.name} className='image-cast__box'>
+      <div key={image.id === undefined && image.id === image.id ? Math.random(): image.id} className='image-cast__box'>
       <img src={image.profile_path === null ? user:`https://image.tmdb.org/t/p/w500/${image.profile_path}`} alt='crew' className='play-cast__image' />
       </div>
       )
@@ -113,6 +112,8 @@ export const MoviesDetail = (props) => {
     setPageCrewNumber(selected)
   }
 
+  
+   
   return (
     <div className='p5'>
       <div className='movie-info'>
@@ -136,7 +137,7 @@ export const MoviesDetail = (props) => {
           </div>
           <div className='play-btn'>
             <img src={play} alt='play' className='play-btn-icon' />
-            <a href='#' className='thriller'>Play Trailer</a>
+            <a href={`https://youtube.com/watch`} className='thriller'>Play Trailer</a>
           </div>
         </div>
       </div>
