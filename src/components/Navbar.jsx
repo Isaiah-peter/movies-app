@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import moviedb from '../api/moviesapi'
 import logo from '../img/film.png'
 import user from '../img/user.jpg'
@@ -9,27 +9,29 @@ import search from '../img/search.png'
 
 
 export const Navbar = () => {
-  const  [searchInput, setSearchIput ] = useState('')
+  const [searchInput, setSearchIput] = useState('')
   const [result, setResult] = useState([])
 
-  useEffect(()=>{
-    if(searchInput && !result.length){
+  useEffect(() => {
+    if (searchInput && !result.length) {
       searchMovies()
-    }else{
-      const timeOutId = setTimeout(()=>{ if(searchInput){
-        searchMovies()
-      }}, 1000)
+    } else {
+      const timeOutId = setTimeout(() => {
+        if (searchInput) {
+          searchMovies()
+        }
+      }, 1000)
 
       return () => {
         clearTimeout(timeOutId)
       }
     }
-  },[searchInput])
+  }, [searchInput])
 
-  const searchMovies = async() =>{
-    const { data } = await moviedb.get('/search/movie',{
-      params:{
-        query:searchInput
+  const searchMovies = async () => {
+    const { data } = await moviedb.get('/search/movie', {
+      params: {
+        query: searchInput,
       }
     })
 
@@ -39,7 +41,7 @@ export const Navbar = () => {
 
 
 
- const hide = () => {
+  const hide = () => {
     const ul = document.getElementById('side-bar')
 
     ul.classList.remove('show')
@@ -53,60 +55,61 @@ export const Navbar = () => {
     close.classList.add('cancel')
   }
 
- const con= () => {
+  const con = () => {
     console.log('rtt')
   }
 
- const searchBar = (e) =>{
+  const searchBar = (e) => {
     setSearchIput(e.target.value)
   }
 
-  const renderList = result.map((res)=>{
-      return(
-        <li className='navbar__search-output-list'>
-                  <a href={`/moviedetail/${res.id}`} className='navbar__search-output-link'>
-                   {res.original_title}
-                  </a>
-                </li>
-      )
+  const renderList = result.map((res) => {
+    
+    return (
+      <li className='navbar__search-output-list'>
+        <a href={`/moviedetail/${res.id}`} className='navbar__search-output-link'>
+          {res.title}
+        </a>
+      </li>
+    )
   })
 
- 
-    return (
-      <div className='navbar'>
-        <div className='navbar__app-detail'>
-          <div className='app-name-icon'>
-            <img  src={logo} className='navbar-logo' alt="logo" />
-            <h1 className='app-name'><a style={{textDecoration:'none' ,color:'#fff'}} href='/'>MoviesApp</a></h1>
-          </div>
-           
-          <div id='side-bar' className='navbar__search-list'>
-            <img id='close' className='navbar-logo' onClick={hide} src={close} alt='close' />
-            <div className='navbar-list'>
-              <nav>
-                <ul className='navbar-items'>
-                  <li className='navbar-item'><a  onClick={hide} href="#">Movies</a></li>
-                  <li className='navbar-item'><a  onClick={hide} href="#">TV Shows</a></li>
-                  <li className='navbar-item'><a  onClick={hide} href="#">Actors</a></li>
-                </ul>
-              </nav>
-            </div>
-            <div className='navbar__search'>
-              <form onSubmit={hide,con} className='navbar__form'>
-                <img className='search-icon' alt='search' src={search} />
-                <input className='navbar__input' onChange={searchBar} value={searchInput} type="text" placeholder='search...' />
-              </form>
-              <img className='user' src={user} />
-            </div>
-            {searchInput !== "" ? <div className='navbar__search-output'>
-              <ul>
-                 {renderList}
-              </ul>
-            </div>:null}
-          </div>
-          <img onClick={show} src={menu} alt='menu' className='navbar-logo menu'/>
+
+  return (
+    <div className='navbar'>
+      <div className='navbar__app-detail'>
+        <div className='app-name-icon'>
+          <img src={logo} className='navbar-logo' alt="logo" />
+          <h1 className='app-name'><a style={{ textDecoration: 'none', color: '#fff' }} href='/'>MoviesApp</a></h1>
         </div>
+
+        <div id='side-bar' className='navbar__search-list'>
+          <img id='close' className='navbar-logo' onClick={hide} src={close} alt='close' />
+          <div className='navbar-list'>
+            <nav>
+              <ul className='navbar-items'>
+                <li className='navbar-item'><a onClick={hide} href="#">Movies</a></li>
+                <li className='navbar-item'><a onClick={hide} href="#">TV Shows</a></li>
+                <li className='navbar-item'><a onClick={hide} href="/actors">Actors</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div className='navbar__search'>
+            <form onSubmit={hide, con} className='navbar__form'>
+              <img className='search-icon' alt='search' src={search} />
+              <input className='navbar__input' onChange={searchBar} value={searchInput} type="text" placeholder='search...' />
+            </form>
+            <img className='user' src={user} />
+          </div>
+          {searchInput !== "" ? <div className='navbar__search-output'>
+            <ul>
+              {renderList}
+            </ul>
+          </div> : null}
+        </div>
+        <img onClick={show} src={menu} alt='menu' className='navbar-logo menu' />
       </div>
-    )
-  }
+    </div>
+  )
+}
 
