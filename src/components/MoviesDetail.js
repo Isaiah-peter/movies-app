@@ -81,7 +81,7 @@ export const MoviesDetail = (props) => {
       if (image) {
         return (
           <div key={image.cast_id === undefined ? Math.random(): image.cast_id} className='play-cast__box'>
-            <img src={image.profile_path === null ? user:`https://image.tmdb.org/t/p/w500/${image.profile_path}`} alt='cast' className='play-cast__image' />
+            <img src={image.profile_path === null ? `https://ui-avatars.com/api/?size=340&name=${image.name}`:`https://image.tmdb.org/t/p/w500/${image.profile_path}`} alt='cast' className='play-cast__image' />
             <div className='play-cast__detail'>
               <h2 className='play-cast__nameR'>{image.name}</h2>
               <h4 className='play-cast__name'>{image.character}</h4>
@@ -94,8 +94,8 @@ export const MoviesDetail = (props) => {
     const renderCrew = crewImage.slice(crewVisitedPage, crewVisitedPage + userPerpage)
     .map((image)=>{
       return (
-      <div key={image.id === undefined && image.id === image.id ? Math.random(): image.id} className='image-cast__box'>
-      <img src={image.profile_path === null ? user:`https://image.tmdb.org/t/p/w500/${image.profile_path}`} alt='crew' className='play-cast__image' />
+      <div key={ Math.floor(Math.random())} className='image-cast__box'>
+      <img src={image.profile_path === null ? `https://ui-avatars.com/api/?size=340&name=${image.name}`:`https://image.tmdb.org/t/p/w500/${image.profile_path}`} alt='crew' className='play-cast__image' />
       </div>
       )
     })
