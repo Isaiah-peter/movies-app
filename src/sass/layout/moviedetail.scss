@@ -106,6 +106,13 @@
     &__box{
         width: 80%;
         height: 40rem;
+
+        &:hover{
+            .boxhover{
+                visibility: visible;
+                margin-top: -11.5rem;
+            }
+        }
     }
     &__image{
         width: 100%;
