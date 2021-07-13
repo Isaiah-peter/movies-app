@@ -55,10 +55,6 @@ export const Navbar = () => {
     close.classList.add('cancel')
   }
 
-  const con = () => {
-    console.log('rtt')
-  }
-
   const searchBar = (e) => {
     setSearchIput(e.target.value)
   }
