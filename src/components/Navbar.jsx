@@ -55,10 +55,6 @@ export const Navbar = () => {
     close.classList.add('cancel')
   }
 
-  const con = () => {
-    console.log('rtt')
-  }
-
   const searchBar = (e) => {
     setSearchIput(e.target.value)
   }
@@ -88,8 +84,8 @@ export const Navbar = () => {
           <div className='navbar-list'>
             <nav>
               <ul className='navbar-items'>
-                <li className='navbar-item'><a onClick={hide} href="#">Movies</a></li>
-                <li className='navbar-item'><a onClick={hide} href="#">TV Shows</a></li>
+                <li className='navbar-item'><a onClick={hide} href="/">Movies</a></li>
+                <li className='navbar-item'><a onClick={hide} href="/tvshow">TV Shows</a></li>
                 <li className='navbar-item'><a onClick={hide} href="/actors">Actors</a></li>
               </ul>
             </nav>

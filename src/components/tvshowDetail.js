@@ -3,7 +3,7 @@ import play from '../img/play-button.png'
 import moviedb from '../api/moviesapi'
 import Paginate from "react-paginate";
 
-export const MoviesDetail = (props) => {
+export const TvShowDetail = (props) => {
   const [detail, setDetail] = useState({})
   const [cast, setCast] = useState({})
   const [currentCast ,setCurrentCast] = useState(0)
@@ -22,14 +22,14 @@ export const MoviesDetail = (props) => {
 
   const getDetail = async () => {
     const Id = props.match.params.id;
-    const response = await moviedb.get(`/movie/${Id}?&append_to_response=videos`)
+    const response = await moviedb.get(`/tv/${Id}?&append_to_response=videos`)
     setDetail(response.data)
 
   }
 
   const getCast = async () => {
     const Id = props.match.params.id;
-    const response = await moviedb.get(`/movie/${Id}/credits`)
+    const response = await moviedb.get(`/tv/${Id}/credits`)
     setCast(response.data.cast[currentCast])
     setCastImage(response.data.cast)
     setCrewImage(response.data.crew)
@@ -158,10 +158,10 @@ export const MoviesDetail = (props) => {
         />
       </div>
 
+      
+      {crewImage.length === 0 ?  null :<div className="p5">
       <div className='border-buttom'>
       </div>
-
-      <div className="p5">
         <h2 className='play-cast__header'>Crew</h2>
         <div className='image-cast'>
             {renderCrew}
@@ -176,7 +176,8 @@ export const MoviesDetail = (props) => {
           nextLinkClassname={'nextBtn'}
           activeClassName={'activebtn'}
         />
-      </div>
+      </div> }
+      
     </div>
   )
 
