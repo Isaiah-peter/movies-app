@@ -1,5 +1,12 @@
 .container{
     padding: 4rem;
+    padding-top: 10rem;
+    
+
+    @include respond(phone){
+        padding: 0;
+        padding-top: 10rem;
+    }
 }
 
 .popular-movies{

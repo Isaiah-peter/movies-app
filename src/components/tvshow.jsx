@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 
 
@@ -22,7 +23,7 @@ export const TvShow = ({ movies, genres}) => {
     return (
       <div  key={movie.id} className='card__content'>
         <a href={`/tvshowdetail/${movie.id}`}>
-          <img className='card__image' src={movie.poster_path === null ? `https://ui-avatars.com/api/?size=340&name=${movie.original_title}`:  `https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt='text' />
+        <div style={{backgroundImage:`url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`}} className='card__image' ></div>
         </a>
         <div className="card__discription">
           <a href={`/tvshowdetail/${movie.id}`} className='card__link'>{movie.original_name}</a>
