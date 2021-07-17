@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 
 
@@ -22,7 +23,7 @@ export const MoviesApp = ({ movies, genres}) => {
     return (
       <div  key={movie.id} className='card__content'>
         <a href={`/moviedetail/${movie.id}`}>
-          <img className='card__image' src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt='text' />
+        <div style={{backgroundImage:`url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`}} className='card__image' ></div>
         </a>
         <div className="card__discription">
           <a href={`/moviedetail/${movie.id}`} className='card__link'>{movie.original_title}</a>

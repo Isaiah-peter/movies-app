@@ -8,21 +8,31 @@
             grid-template-columns: repeat(3, 1fr); 
         }
         @include respond(phone){
-            grid-template-columns: repeat(2, 1fr); 
+            grid-template-columns: repeat(2, 1fr);
+            gap: .5rem; 
         }
     }
     &__content{
         margin-top: 3rem;
     }
     &__image{
-        width: 80%;
-        height: 27rem;
+        width: 90%;
+        height: 35rem;
         background-repeat: no-repeat;
         background-size: cover;
-        transition: all 2 ease-in;
+        transition: all .4s ease-in;
+        @include respond(big-laptop){
+            height: 70rem;
+            width: 100%;
+        }
+
+        @include respond(laptop){
+            height: 70rem;
+            width: 100%;
+        }
 
         &:hover{
-            opacity: 75%;
+            transform: scale(1.1);
         }
     }
     &__discription{
@@ -52,5 +62,6 @@
 
     &__discription{
         color: $color-gray-300;
+        width: 80%;
     }
 }

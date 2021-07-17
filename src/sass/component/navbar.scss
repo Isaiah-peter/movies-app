@@ -2,6 +2,7 @@
     width: 100%;
     padding: 2rem  0;
     border-bottom: .1rem solid $color-gray-800;
+    position: fixed;
    
 
     &__search-list{
@@ -16,6 +17,10 @@
         justify-content: space-between;
         align-items: center;
         margin-left: 4rem;
+
+        @include respond(phone){
+            margin-left: 0;
+        }
 
         
     }
@@ -66,20 +71,15 @@
             background-color: $color-gray-800;
             border-radius: .3rem;
             right: 6%;
-            top: 7%;
+            top: 100%;
             width: 24rem;
             font-size: 1.6rem;
 
             @include respond(tab-port){
             width: 100%;
              right: 0%;
-             top: 23%;
+             top: 33%;
             }
-            @include respond(phone){
-                width: 100%;
-                right: 0%;
-                top: 35%;
-               }
 
             &-list{
                 border-bottom: 1px solid $color-gray-400;
@@ -132,7 +132,7 @@
            }
            @include respond(phone){
             position: fixed;
-           width: 60%;
+           width: 80%;
            height: 100%;
            background: #2f3640;
            top: 0;

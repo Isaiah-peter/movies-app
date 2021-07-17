@@ -40,7 +40,7 @@ export const Actors = () => {
   const renderActor = result.map((res) => {
     return (
       <div key={res.id === undefined ? res.profile_path : res.id} className='play-cast__box'>
-        <img src={res.profile_path === null ? `https://ui-avatars.com/api/?size=340&name=${res.name}` : `https://image.tmdb.org/t/p/w500/${res.profile_path}`} alt='cast' className='play-cast__image' />
+        <div style={{backgroundImage:`url(https://image.tmdb.org/t/p/w500/${res.profile_path})`}} className='play-cast__image' ></div>
         <div className='boxhover'>
           <h2 className='play-cast__nameR'>{res.name}</h2>
           <h4 className='play-cast__name'>{res.known_for_department}</h4>

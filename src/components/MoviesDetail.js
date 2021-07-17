@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import play from '../img/play-button.png'
 import moviedb from '../api/moviesapi'
 import Paginate from "react-paginate";
+import {Link} from 'react-router-dom'
 
 export const MoviesDetail = (props) => {
   const [detail, setDetail] = useState({})
@@ -80,7 +81,7 @@ export const MoviesDetail = (props) => {
       if (image) {
         return (
           <div key={image.cast_id === undefined ? Math.random(): image.cast_id} className='play-cast__box'>
-            <img src={image.profile_path === null ? `https://ui-avatars.com/api/?size=340&name=${image.name}`:`https://image.tmdb.org/t/p/w500/${image.profile_path}`} alt='cast' className='play-cast__image' />
+            <div style={{backgroundImage:`linear-gradient(to left bottom, rgba(121, 32, 72, 0.502), rgba(63, 141, 198, .5)),url(https://image.tmdb.org/t/p/w500/${image.profile_path})`}} className='play-cast__image' ></div>
             <div className='play-cast__detail'>
               <h2 className='play-cast__nameR'>{image.name}</h2>
               <h4 className='play-cast__name'>{image.character}</h4>
@@ -94,7 +95,7 @@ export const MoviesDetail = (props) => {
     .map((image)=>{
       return (
       <div key={ Math.floor(Math.random())} className='image-cast__box'>
-      <img src={image.profile_path === null ? `https://ui-avatars.com/api/?size=340&name=${image.name}`:`https://image.tmdb.org/t/p/w500/${image.profile_path}`} alt='crew' className='play-cast__image' />
+      <div style={{backgroundImage:`linear-gradient(to left bottom, rgba(121, 32, 72, 0.502), rgba(63, 141, 198, .5)),url(https://image.tmdb.org/t/p/w500/${image.profile_path})`}} className='play-cast__image' ></div>
       </div>
       )
     })
@@ -106,7 +107,7 @@ export const MoviesDetail = (props) => {
     setPageNumber(selected)
   }
 
-  const pageCrewCount = Math.ceil(castImage.length / userPerpage)
+  const pageCrewCount = Math.ceil(crewImage.length / userPerpage)
   const pageCrewChange = ({ selected }) => {
     setPageCrewNumber(selected)
   }
@@ -116,7 +117,7 @@ export const MoviesDetail = (props) => {
   return (
     <div className='p5'>
       <div className='movie-info'>
-        <img src={`https://image.tmdb.org/t/p/w500/${detail.poster_path}`} className='movie-info__image' alt='movie detail' />
+      <div style={{backgroundImage:`linear-gradient(to left bottom, rgba(121, 32, 72, 0.502), rgba(63, 141, 198, .5)),url(https://image.tmdb.org/t/p/w500/${detail.poster_path})`}} className='movie-info__image' ></div>
         <div className='movie-info__details'>
           <div className='movie-info__header'>
             <h1 className='movie-info__header-name'>{detail.original_title}</h1>
@@ -136,7 +137,7 @@ export const MoviesDetail = (props) => {
           </div>
           <div className='play-btn'>
             <img src={play} alt='play' className='play-btn-icon' />
-            <a href={`https://youtube.com/watch`} className='thriller'>Play Trailer</a>
+            <Link to={`https://youtube.com/watch`} className='thriller'>Play Trailer</Link>
           </div>
         </div>
       </div>

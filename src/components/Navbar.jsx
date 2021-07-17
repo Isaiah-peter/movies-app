@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import moviedb from '../api/moviesapi'
 import logo from '../img/film.png'
 import user from '../img/user.jpg'
@@ -13,17 +14,33 @@ export const Navbar = () => {
   const [result, setResult] = useState([])
 
   useEffect(() => {
-    if (searchInput && !result.length) {
-      searchMovies()
-    } else {
-      const timeOutId = setTimeout(() => {
-        if (searchInput) {
-          searchMovies()
-        }
-      }, 1000)
+    if (window.location.pathname === '/'|| window.location.pathname === '/actors') {
+      if (searchInput && !result.length) {
+        searchMovies()
+      } else {
+        const timeOutId = setTimeout(() => {
+          if (searchInput) {
+            searchMovies()
+          }
+        }, 1000)
 
-      return () => {
-        clearTimeout(timeOutId)
+        return () => {
+          clearTimeout(timeOutId)
+        }
+      }
+    } else if (window.location.pathname === '/tvshow') {
+      if (searchInput && !result.length) {
+        searchTvshow()
+      } else {
+        const timeOutId = setTimeout(() => {
+          if (searchInput) {
+            searchTvshow()
+          }
+        }, 1000)
+
+        return () => {
+          clearTimeout(timeOutId)
+        }
       }
     }
   }, [searchInput])
@@ -36,9 +53,17 @@ export const Navbar = () => {
     })
 
     setResult(data.results)
-    console.log(data.results)
   }
 
+  const searchTvshow = async () => {
+    const { data } = await moviedb.get('/search/tv', {
+      params: {
+        query: searchInput,
+      }
+    })
+
+    setResult(data.results)
+  }
 
 
   const hide = () => {
@@ -59,12 +84,17 @@ export const Navbar = () => {
     setSearchIput(e.target.value)
   }
 
-  const renderList = result.map((res) => {
-    
+  const renderList = result.slice(0, 12).map((res) => {
+
     return (
       <li className='navbar__search-output-list'>
-        <a href={`/moviedetail/${res.id}`} className='navbar__search-output-link'>
-          {res.title}
+        <a
+          href={window.location.pathname === '/' ||
+            window.location.pathname === '/actors' ?
+            `/moviedetail/${res.id}` : `/tvshowdetail/${res.id}`
+          }
+          className='navbar__search-output-link'>
+          {res.title || res.name}
         </a>
       </li>
     )
@@ -91,10 +121,14 @@ export const Navbar = () => {
             </nav>
           </div>
           <div className='navbar__search'>
-            <form onSubmit={hide, con} className='navbar__form'>
-              <img className='search-icon' alt='search' src={search} />
-              <input className='navbar__input' onChange={searchBar} value={searchInput} type="text" placeholder='search...' />
-            </form>
+            {
+              window.location.pathname === '/tvshow' ||
+              window.location.pathname === '/' ?
+               <form onSubmit={hide} className='navbar__form'>
+                <img className='search-icon' alt='search' src={search} />
+                <input className='navbar__input' onChange={searchBar} value={searchInput} type="text" placeholder='search...' />
+              </form> : null
+            }
             <img className='user' src={user} />
           </div>
           {searchInput !== "" ? <div className='navbar__search-output'>
