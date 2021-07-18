@@ -20,16 +20,14 @@
         height: 35rem;
         background-repeat: no-repeat;
         background-size: cover;
+        background-position: center center;
         transition: all .4s ease-in;
         @include respond(big-laptop){
             height: 70rem;
             width: 100%;
         }
 
-        @include respond(laptop){
-            height: 70rem;
-            width: 100%;
-        }
+       
 
         &:hover{
             transform: scale(1.1);

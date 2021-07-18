@@ -12,8 +12,9 @@
         height: 70rem;
         flex: 0 0 45%;
         background-repeat: no-repeat;
-        background-size: cover;
+        background-size: contain;
         transition: all .4s;
+        background-position: center center;
 
         @include respond(phone){
             width: 100%;
@@ -136,7 +137,8 @@
         height: 80%;
         border-radius: .3rem;
         background-repeat: no-repeat;
-        background-size: cover;
+        background-size: contain;
+        background-position: center center;
 
         @include respond(big-laptop){
             height: 100%;
