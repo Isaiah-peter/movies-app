@@ -117,7 +117,7 @@ export const MoviesDetail = (props) => {
   return (
     <div className='p5'>
       <div className='movie-info'>
-      <div style={{backgroundImage:`linear-gradient(to left bottom, rgba(121, 32, 72, 0.502), rgba(63, 141, 198, .5)),url(https://image.tmdb.org/t/p/w500/${detail.poster_path})`}} className='movie-info__image' ></div>
+      <div style={{backgroundImage:`url(https://image.tmdb.org/t/p/w500/${detail.poster_path})`}} className='movie-info__image' ></div>
         <div className='movie-info__details'>
           <div className='movie-info__header'>
             <h1 className='movie-info__header-name'>{detail.original_title}</h1>
