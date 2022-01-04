@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import play from "../img/play-button.png";
 import moviedb from "../api/moviesapi";
 import Paginate from "react-paginate";
-import { Link } from "react-router-dom";
 
 export const MoviesDetail = (props) => {
   const [detail, setDetail] = useState({});
@@ -12,6 +11,7 @@ export const MoviesDetail = (props) => {
   const [pageNumber, setPageNumber] = useState(0);
   const [crewImage, setCrewImage] = useState([]);
   const [pageCrewNumber, setPageCrewNumber] = useState(0);
+  const [videotoplay, setVideotoplay] = useState(false);
 
   let userPerpage = 4;
   if (window.innerWidth <= 900) {
@@ -60,7 +60,7 @@ export const MoviesDetail = (props) => {
   const getCastdata = () => {
     if (cast) {
       return (
-        <div className="feature__info">
+        <div key={cast.original_name} className="feature__info">
           <div>
             <div className="feature__info-header">{cast.character}</div>
           </div>
@@ -78,7 +78,7 @@ export const MoviesDetail = (props) => {
       if (image) {
         return (
           <div
-            key={image.cast_id === undefined ? Math.random() : image.cast_id}
+            key={image.cast_id === undefined ? image.character : image.cast_id}
             className="play-cast__box"
           >
             <div
@@ -121,6 +121,12 @@ export const MoviesDetail = (props) => {
     setPageCrewNumber(selected);
   };
 
+  if (videotoplay === true) {
+    console.log(
+      `https://www.youtube.com/embed/${detail.videos.results[0].key}`
+    );
+  }
+
   return (
     <div className="p5">
       <div className="movie-info">
@@ -148,17 +154,26 @@ export const MoviesDetail = (props) => {
             <div className="feature__header">Feature Cast</div>
             {getCastdata()}
           </div>
-          <div className="play-btn">
+          <div className="play-btn" onClick={() => setVideotoplay(true)}>
             <img src={play} alt="play" className="play-btn-icon" />
-            <Link
-              to={`https://www.youtube.com/watch?v=${
-                detail.length > 0 && detail.videos.results[0].key
-              }`}
-              className="thriller"
-              target="_blank"
-            >
-              Play Trailer
-            </Link>
+            <div className="thriller">Play Trailer</div>
+
+            <iframe
+              className={
+                videotoplay ? "play-videoframe-show" : "play-videoframe"
+              }
+              src={
+                videotoplay
+                  ? `https://www.youtube.com/embed/${
+                      detail.length > 0 && detail.videos.results[0].key
+                    }`
+                  : ""
+              }
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
           </div>
         </div>
       </div>

@@ -28,6 +28,8 @@
         width: 2.8rem;
         height: 2.8rem;
         margin-right: .4rem;
+        color: black;
+        font-size: 2rem !important;
     }
 
     &-list>nav{
@@ -101,21 +103,25 @@
         }
     }
     &__input{
-        width: 20rem;
+        width: 80%;
         border: none;
         outline: none;
         font-size: 1.6rem;
         border-radius: 20rem;
         margin-right: 2rem;
         padding: .6rem 2.5rem;
-        background-color: $color-gray-800;
         color: $color-white;
+        background-color: inherit;
+
     }
 
     &__form{
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: $color-gray-800;
+        border-radius: 18rem;
+        margin-right: 1rem;
     }
 
     &__search-list{
@@ -161,11 +167,9 @@
 }
 .search-icon{
     height: 2.9rem;
-    width: 2.9rem;
-    background-color: $color-gray-800;
-    border-radius: 100%;
-    margin-right: -2.5rem;
+    width: 20%;
     z-index: 1;
+    color: white;
 }
 
 .menu{
