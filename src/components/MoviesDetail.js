@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import play from "../img/play-button.png";
 import moviedb from "../api/moviesapi";
 import Paginate from "react-paginate";
+import YouTube from "react-youtube";
 
 export const MoviesDetail = (props) => {
   const [detail, setDetail] = useState({});
@@ -55,6 +56,11 @@ export const MoviesDetail = (props) => {
       result.push("genres");
     }
     return result.join(",");
+  };
+
+  const onReady = (event) => {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo();
   };
 
   const getCastdata = () => {
@@ -157,23 +163,17 @@ export const MoviesDetail = (props) => {
           <div className="play-btn" onClick={() => setVideotoplay(true)}>
             <img src={play} alt="play" className="play-btn-icon" />
             <div className="thriller">Play Trailer</div>
-
-            <iframe
+            <YouTube
               className={
                 videotoplay ? "play-videoframe-show" : "play-videoframe"
               }
-              src={
+              videoId={
                 videotoplay
-                  ? `https://www.youtube.com/embed/${
-                      detail.length > 0 && detail.videos.results[0].key
-                    }`
-                  : ""
+                  ? `${detail.length > 0 && detail.videos.results[0].key}`
+                  : null
               }
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+              onReady={onReady}
+            />
           </div>
         </div>
       </div>
