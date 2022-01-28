@@ -163,16 +163,18 @@ export const MoviesDetail = (props) => {
           <div className="play-btn" onClick={() => setVideotoplay(true)}>
             <img src={play} alt="play" className="play-btn-icon" />
             <div className="thriller">Play Trailer</div>
-            <YouTube
+
+            <iframe
               className={
                 videotoplay ? "play-videoframe-show" : "play-videoframe"
               }
-              videoId={
-                videotoplay
-                  ? `${detail.length > 0 && detail.videos.results[0].key}`
-                  : null
-              }
-              onReady={onReady}
+              width="853"
+              height="480"
+              src={`https://www.youtube.com/embed/${embedId}`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="Embedded youtube"
             />
           </div>
         </div>
