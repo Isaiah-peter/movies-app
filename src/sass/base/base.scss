@@ -26,3 +26,18 @@
         font-size: 75%;
       }
     }
+
+@media (hover: hover) {
+  a:hover{
+    background-color: #ff0000;
+  }
+}
+
+.section{
+  padding: 0 2rem;
+}
+
+.section__header{
+  @include flex(center, space-between);
+}
+

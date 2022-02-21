@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import play from "../img/play-button.png";
 import moviedb from "../api/moviesapi";
 import Paginate from "react-paginate";
-import YouTube from "react-youtube";
 
 export const MoviesDetail = (props) => {
   const [detail, setDetail] = useState({});
@@ -170,7 +169,7 @@ export const MoviesDetail = (props) => {
               }
               width="853"
               height="480"
-              src={`https://www.youtube.com/embed/${embedId}`}
+              src={`https://www.youtube.com/embed/${0}`}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

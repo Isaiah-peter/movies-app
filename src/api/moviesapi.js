@@ -1,12 +1,31 @@
-import axios from 'axios';
-const KEY = '01ce0249e6d58cea5cd631a0b47bb6ab'
+import axios from "axios";
+import queryString from "query-string";
+import apiConfig from "./apiconfig";
 
+const axiosClient = axios.create({
+  baseURL: apiConfig.baseURL,
+  headers: {
+    "Content-type": "application/json",
+  },
+  paramsSerializer: (params) =>
+    queryString.stringify({ ...params, apiKey: apiConfig.api_key }),
+  params: {
+    api_key: apiConfig.api_key,
+  },
+});
 
+axiosClient.interceptors.request.use(async (config) => config);
 
+axiosClient.interceptors.response.use(
+  (response) => {
+    if (response && response.data) {
+      return response.data;
+    }
+    return response;
+  },
+  (err) => {
+    throw err;
+  }
+);
 
-export default axios.create({
-    baseURL: 'https://api.themoviedb.org/3',
-    params:{
-     api_key:KEY
-    },
-})
+export default axiosClient;

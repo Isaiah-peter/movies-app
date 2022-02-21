@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export const MoviesApp = ({ movies, genres }) => {
+export const MoviesApp = ({ movies, genres, type }) => {
+  console.log("from movies", genres.genres);
   const getGenres = (ids) => {
     let result = [];
     if (ids === "") {
       return <div>loading</div>;
     }
-    genres.forEach((item) => {
-      if (ids.includes(item.id)) {
-        result.push(item.name);
-      }
-    });
+    if (genres.length > 0) {
+      genres.forEach((item) => {
+        console.log("inside for loop", item);
+        if (ids.includes(item.id)) {
+          result.push(item.name);
+        }
+      });
+    }
 
     return result.join(",");
   };

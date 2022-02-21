@@ -47,7 +47,7 @@ export const TvShowDetail = (props) => {
     let result = [];
     if (detail.genres) {
       detail.genres.map((item) => {
-        result.push(item.name);
+        return result.push(item.name);
       });
     } else {
       result.push("genres");
