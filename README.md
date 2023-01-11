@@ -9,4 +9,3 @@ Movie App fetch data from themoviesdb. you can search for movies, see the detail
 ## Installation
 React
 React pagenation
-
