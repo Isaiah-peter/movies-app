@@ -1,14 +1,16 @@
 # Movie App
 
 # Introduction
-## Author
-    Peter Isaiah
+ Author - [Peter Isaiah](https://www.linkedin.com/in/peter-isaiah-607943200/)
 https://movies-app-19yzveyvt-isaiah-peter.vercel.app/
+
 Movie App fetch data from themoviesdb. you can search for movies, see the details
 
 ## Installation
 git clone https://github.com/Isaiah-peter/movies-app.git
+
 cd movies-app
+
 yarn run start
 
 
