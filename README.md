@@ -7,5 +7,6 @@
 Movie App fetch data from themoviesdb. you can search for movies, see the details
 
 ## Installation
-React
-React pagenation
+git clone https://github.com/Isaiah-peter/movies-app.git
+cd movies-app
+yarn run start
