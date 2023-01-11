@@ -2,6 +2,7 @@
 
 # Introduction
  Author - [Peter Isaiah](https://www.linkedin.com/in/peter-isaiah-607943200/)
+ 
 https://movies-app-19yzveyvt-isaiah-peter.vercel.app/
 
 Movie App fetch data from themoviesdb. you can search for movies, see the details
