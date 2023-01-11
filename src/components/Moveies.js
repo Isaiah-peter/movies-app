@@ -1,3 +1,7 @@
+/*
+get all movies
+*/
+
 import React from "react";
 
 export const MoviesApp = ({ movies, genres }) => {

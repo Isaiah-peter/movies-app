@@ -1,3 +1,7 @@
+/*
+get all actor
+*/
+
 import React, { useState, useEffect } from 'react'
 import moviedb from '../api/moviesapi'
 
@@ -8,6 +12,9 @@ export const Actors = () => {
 
 
   const getActor = async () => {
+    /*
+    it get all actors
+    */
     const res = await moviedb.get(`/person/popular`, {
       params: {
         page: pageNumber
@@ -18,6 +25,9 @@ export const Actors = () => {
   }
 
   const nextPage = () => {
+    /*
+     move to next page
+    */
     setPageNumber(pageNumber + 1)
     if (pageNumber >= totalPageNumber) {
       setPageNumber(1)
@@ -25,6 +35,9 @@ export const Actors = () => {
   }
 
   const priviousPage = () => {
+    /*
+     move to privous page
+    */
     setPageNumber(pageNumber - 1)
     if (pageNumber > 0) {
       setPageNumber(1)

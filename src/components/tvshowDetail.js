@@ -1,3 +1,7 @@
+/*
+get all show detail of tv show
+*/
+
 import React, { useState, useEffect } from "react";
 import play from "../img/play-button.png";
 import moviedb from "../api/moviesapi";
