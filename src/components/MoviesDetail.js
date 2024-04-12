@@ -6,7 +6,6 @@ import React, { useState, useEffect } from "react";
 import play from "../img/play-button.png";
 import moviedb from "../api/moviesapi";
 import Paginate from "react-paginate";
-import YouTube from "react-youtube";
 
 export const MoviesDetail = (props) => {
   const [detail, setDetail] = useState({});
@@ -60,11 +59,6 @@ export const MoviesDetail = (props) => {
       result.push("genres");
     }
     return result.join(",");
-  };
-
-  const onReady = (event) => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
   };
 
   const getCastdata = () => {
@@ -166,18 +160,18 @@ export const MoviesDetail = (props) => {
           </div>
           <div className="play-btn" onClick={() => setVideotoplay(true)}>
             <img src={play} alt="play" className="play-btn-icon" />
-            <div className="thriller">Play Trailer</div>
-            <YouTube
+            <div className="thriller">stream</div>
+            
+            <div
               className={
                 videotoplay ? "play-videoframe-show" : "play-videoframe"
-              }
-              videoId={
-                videotoplay
-                  ? `${detail.length > 0 && detail.videos.results[0].key}`
-                  : null
-              }
-              onReady={onReady}
-            />
+              }>
+              <iframe
+                title={props.match.params.id}
+                src={`https://vidsrc.to/embed/movie/${props.match.params.id}`}
+                allowFullScreen={true}
+              ></iframe>
+            </div>
           </div>
         </div>
       </div>

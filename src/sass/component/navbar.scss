@@ -3,6 +3,14 @@
     padding: 2rem  0;
     border-bottom: .1rem solid $color-gray-800;
     position: fixed;
+    z-index: 999999;
+
+
+    @supports( -webkit-backdrop-filter: blur(10px)) or ( backdrop-filter: blur(10px)){
+        -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      background-color: rgba(0,0,0, .3) ;
+      };
    
 
     &__search-list{
@@ -69,20 +77,18 @@
         &-output{
             position: absolute;
             background-color: $color-gray-800;
-            border-radius: .3rem;
-            right: 6%;
+            left: 0;
             top: 100%;
-            width: 24rem;
-            font-size: 1.6rem;
+            width: 100%;
+            font-size: 1.2rem;
 
             @include respond(tab-port){
             width: 100%;
              right: 0%;
-             top: 33%;
+             top: 100%;
             }
 
             &-list{
-                border-bottom: 1px solid $color-gray-400;
                 list-style: none;
                 padding: 1rem;
             }
@@ -101,7 +107,7 @@
         }
     }
     &__input{
-        width: 90%;
+        width: 80%;
         border: none;
         outline: none;
         font-size: 1.6rem;
@@ -118,8 +124,9 @@
         justify-content: center;
         align-items: center;
         background-color: $color-gray-800;
-        border-radius: 18rem;
         margin-right: 1rem;
+        flex-direction: row-reverse;
+        position: relative;
     }
 
     &__search-list{
@@ -133,6 +140,12 @@
            right: -100%;
            transition: all .5s;
            display: block;
+
+           @supports( -webkit-backdrop-filter: blur(10px)) or ( backdrop-filter: blur(10px)){
+            -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+          background-color: rgba(0,0,0, .3) ;
+          };
            }
            @include respond(phone){
             position: fixed;
@@ -144,6 +157,12 @@
            right: -100%;
            transition: all .5s;
            display: block;
+
+           @supports( -webkit-backdrop-filter: blur(10px)) or ( backdrop-filter: blur(10px)){
+            -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+          background-color: rgba(0,0,0, .3) ;
+          };
            }
     }
      
@@ -168,6 +187,8 @@
     width: 10%;
     z-index: 1;
     color: white;
+    align-self: flex-end;
+    padding: 10px;
 }
 
 .menu{

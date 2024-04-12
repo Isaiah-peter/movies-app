@@ -144,16 +144,16 @@ export const Navbar = () => {
                   value={searchInput}
                   type="text"
                   placeholder="search..."
-                />
+                  />
+                {searchInput !== "" ? (
+                  <div className="navbar__search-output">
+                    <ul>{renderList}</ul>
+                  </div>
+                ) : null}  
               </form>
             ) : null}
             <img className="user" src={user} />
           </div>
-          {searchInput !== "" ? (
-            <div className="navbar__search-output">
-              <ul>{renderList}</ul>
-            </div>
-          ) : null}
         </div>
         <MdOutlineMenu onClick={show} className="navbar-logo menu" />
       </div>
