@@ -1,3 +1,6 @@
+@use '../abstract/mixin.scss' as *;
+@use '../abstract/variable.scss' as *;
+
 .card{
     &__container{
         display: grid;

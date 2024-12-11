@@ -1,4 +1,7 @@
-   .boxhover{
+@use '../abstract/mixin.scss' as *;
+@use '../abstract/variable.scss' as *;
+
+.boxhover{
   border-radius: .3rem;
   z-index: 100;
   margin-top: -15rem;

@@ -1,3 +1,6 @@
+@use '../abstract/variable.scss' as *;
+@use '../abstract/mixin.scss' as *;
+
 .navbar{
     width: 100%;
     padding: 2rem  0;

@@ -1,15 +1,15 @@
-@import 'abstract/variable';
-@import 'abstract/mixin.scss';
+@use 'abstract/variable';
+@use 'abstract/mixin.scss';
 
-@import 'base/base';
-@import 'base/typography.scss';
-@import 'base/utility.scss';
+@use 'base/base';
+@use 'base/typography.scss';
+@use 'base/utility.scss';
 
-@import 'component/navbar';
-@import "component/pagination.scss";
+@use 'component/navbar';
+@use "component/pagination.scss";
 
-@import 'layout/card.scss';
-@import 'layout/moviedetail.scss';
-@import 'layout/hoverpage.scss';
+@use 'layout/card.scss';
+@use 'layout/moviedetail.scss';
+@use 'layout/hoverpage.scss';
 
-@import 'page/home'
+@use 'page/home'
