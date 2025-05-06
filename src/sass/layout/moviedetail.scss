@@ -116,6 +116,14 @@
         width: 100%;
         height: 100%;
     }
+
+    &-cancel {
+        width: 20px;
+        height: 20px;
+        stroke: white;
+        position: absolute;
+        top: 20%;
+    }
 }
 
 .play-videoframe-show {
@@ -235,3 +243,58 @@
         height: 800%;
     }
 }
+
+.chat-bot {
+    width: 20%;
+    position: sticky;
+    bottom: 10%;
+    left: 100%;
+}
+
+.recomender-window {
+    padding: 1em;
+    border: 1px solid gray;
+    height: 300px;
+    overflow-y: scroll;
+    scrollbar-width: 0px;
+    background-color: $color-gray-800;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    gap: 5px;
+}
+
+.recomender-form {
+    display: flex;
+    align-items: center;
+}
+
+.recomender-input {
+    width: 70%;
+    padding: 0.6rem 1rem;
+    border: none;
+    outline: none;
+}
+
+.recomender-button {
+    width: 30%;
+    padding: 1rem;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+}
+
+.white-text {
+    color: white;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge, Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+  }

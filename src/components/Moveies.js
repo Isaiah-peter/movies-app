@@ -3,6 +3,7 @@ get all movies
 */
 
 import React from "react";
+import ChatRecommender from "./movieRecomender"
 
 export const MoviesApp = ({ movies, genres }) => {
   const getGenres = (ids) => {
@@ -54,6 +55,10 @@ export const MoviesApp = ({ movies, genres }) => {
         <h2>Popular Movies</h2>
       </div>
       <div className="card__container">{renderMovise}</div>
+
+      <div class="chat-bot">
+        <ChatRecommender />
+      </div>
     </div>
   );
 };
