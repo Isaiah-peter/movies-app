@@ -1,84 +1,101 @@
 import React, { useState, useEffect } from 'react';
-import { MdSearch } from "react-icons/md";
-import moviedb from "../api/moviesapi";
 
-export default function ChatRecommender() {
+
+const OPENAI_API_KEY = process.env.REACT_APP_OPEN_AI_KEY;
+const TMDB_API_KEY = process.env.REACT_APP_MOVIES_API_KEY;
+
+export default function MovieRecommender() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
-  const [genres, setGenres] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
-  const [openOutputBar, setOpenOutputBar] = useState(false)
-
-  useEffect(() => {
-    fetchGenres();
-  }, []);
-
-  const fetchGenres = async () => {
-    const res = await moviedb.get(`/genre/movie/list`);
-    const data = await res.data;
-    setGenres(data.genres);
-  };
-
-  // No import needed — compromise is available globally as `nlp`
-const extractGenresFromInput = (text) => {
-  const doc = window.nlp(text); // ← use global `nlp`
-  const tokens = doc.nouns().out('array').map(t => t.toLowerCase());
-
-  const genreNames = genres.map(g => g.name.toLowerCase());
-  const found = tokens.filter(token => genreNames.includes(token));
-  return genres.filter(g => found.includes(g.name.toLowerCase()));
-};
-
 
   const handleSend = async () => {
-    setOpenOutputBar(true)
-    setMessages([...messages, { sender: 'user', text: input }]);
-    const matchedGenres = extractGenresFromInput(input);
-  
-    if (matchedGenres.length > 0) {
-      const genreIds = matchedGenres.map(g => g.id).join(',');
-      const res = await moviedb.get(`/discover/movie?&with_genres=${genreIds}`);
-      const data = await res.data;
-      setRecommendations(data.results.slice(0, 5));
-      
-      const genreNames = matchedGenres.map(g => g.name).join(', ');
-      setMessages(prev => [...prev, {
-        sender: 'bot',
-        text: `Here are some ${genreNames} movies you might like:`
-      }]);
-    } else {
-      setMessages(prev => [...prev, {
-        sender: 'bot',
-        text: `Sorry, I couldn't detect any known genres. Try mentioning "comedy", "horror", etc.`
-      }]);
-    }
-  
+    if (!input.trim()) return;
+
+    const userMessage = { sender: 'user', text: input };
+    setMessages(prev => [...prev, userMessage]);
     setInput('');
+
+    const aiReply = await getGenresAndMoviesFromAI(input);
+    let responseObj;
+
+    try {
+      responseObj = JSON.parse(aiReply);
+    } catch (err) {
+      setMessages(prev => [...prev, { sender: 'bot', text: "Sorry, I couldn't understand that." }]);
+      return;
+    }
+
+    const genreNames = responseObj.genres || [];
+    const titles = responseObj.movies || [];
+
+    const genreList = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${TMDB_API_KEY}&language=en-US`)
+      .then(res => res.json());
+
+    const genreIds = genreList.genres
+      .filter(g => genreNames.map(gn => gn.toLowerCase()).includes(g.name.toLowerCase()))
+      .map(g => g.id);
+
+    const movieResults = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&with_genres=${genreIds.join(',')}`)
+      .then(res => res.json());
+
+    setRecommendations(movieResults.results.slice(0, 5));
+
+    setMessages(prev => [...prev, {
+      sender: 'bot',
+      text: `Based on your mood, I recommend these genres: ${genreNames.join(', ')}. Here are some suggestions:`
+    }]);
   };
-  
+
+  const getGenresAndMoviesFromAI = async (userInput) => {
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${OPENAI_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'gpt-4',
+        messages: [
+          { role: 'system', content: 'You are a movie recommendation assistant. Reply with a JSON object: {"genres": [...], "movies": [...]}.' },
+          { role: 'user', content: userInput }
+        ],
+        temperature: 0.7
+      })
+    });
+
+    const data = await res.json();
+    return data.choices[0].message.content;
+  };
 
   return (
-    <div>
-      <div class = {openOutputBar ? "recomender-window .no-scrollbar" : ""}>
-        {messages.map((msg, i) => <div key={i}><strong>{msg.sender}:</strong> {msg.text}</div>)}
-        {recommendations.map((movie, i) => (
-          <a id={i}
-          href={
-            window.location.pathname === "/" ||
-            window.location.pathname === "/actors"
-              ? `/moviedetail/${movie.id}`
-              : `/tvshowdetail/${movie.id}`
-          }
-          className="navbar__search-output-link"
-        >
-          🎬 {movie.title || movie.name}
-        </a>
+    <div className="p-4 max-w-xl mx-auto">
+      <div className="border p-4 rounded bg-white mb-4 h-80 overflow-y-auto">
+        {messages.map((m, i) => (
+          <div key={i} className={`mb-2 ${m.sender === 'user' ? 'text-right' : 'text-left'}`}>
+            <span className={`inline-block px-3 py-2 rounded-lg ${m.sender === 'user' ? 'bg-blue-200' : 'bg-gray-200'}`}>{m.text}</span>
+          </div>
         ))}
       </div>
-      <div class="recomender-form">
-      <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Type your movie preference..." class="recomender-input" />
-      <button class="recomender-button" onClick={handleSend}><MdSearch class="text-white" /></button>
-      </div>
+      <input
+        value={input}
+        onChange={e => setInput(e.target.value)}
+        onKeyDown={e => e.key === 'Enter' && handleSend()}
+        className="w-full p-2 border rounded mb-4"
+        placeholder="Describe what kind of movie you want..."
+      />
+      <button onClick={handleSend} className="bg-blue-500 text-white px-4 py-2 rounded">Send</button>
+
+      {recommendations.length > 0 && (
+        <div className="mt-6">
+          <h2 className="text-lg font-semibold mb-2">Recommended Movies:</h2>
+          <ul>
+            {recommendations.map(movie => (
+              <li key={movie.id} className="mb-2">🎬 {movie.title}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
