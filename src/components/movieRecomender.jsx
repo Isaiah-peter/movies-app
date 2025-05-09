@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 
-const OPENAI_API_KEY = process.env.REACT_APP_OPEN_AI_KEY;
 const TMDB_API_KEY = process.env.REACT_APP_MOVIES_API_KEY;
 
 export default function MovieRecommender() {
@@ -16,7 +15,7 @@ export default function MovieRecommender() {
     setMessages(prev => [...prev, userMessage]);
     setInput('');
 
-    const aiReply = await getGenresAndMoviesFromAI(input);
+    const aiReply = await extractGenresFromInput(input);
     let responseObj;
 
     try {
@@ -47,25 +46,10 @@ export default function MovieRecommender() {
     }]);
   };
 
-  const getGenresAndMoviesFromAI = async (userInput) => {
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${OPENAI_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: 'gpt-4',
-        messages: [
-          { role: 'system', content: 'You are a movie recommendation assistant. Reply with a JSON object: {"genres": [...], "movies": [...]}.' },
-          { role: 'user', content: userInput }
-        ],
-        temperature: 0.7
-      })
-    });
-
-    const data = await res.json();
-    return data.choices[0].message.content;
+  const extractGenresFromInput = (text) => {
+    const genreNames = genres.map(g => g.name.toLowerCase());
+    const foundGenres = genreNames.filter(name => text.toLowerCase().includes(name));
+    return genres.filter(g => foundGenres.includes(g.name.toLowerCase()));
   };
 
   return (
