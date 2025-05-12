@@ -46,7 +46,8 @@ export default function MovieRecommender() {
       const genreNames = matchedGenres.map(g => g.name).join(', ');
       setMessages(prev => [...prev, {
         sender: 'bot',
-        text: `Here are some ${genreNames} movies you might like:`
+        text: `Here are some ${genreNames} movies you might like:`,
+        results: data.results.slice(0, 5)
       }]);
     } else {
       setMessages(prev => [...prev, {
@@ -65,6 +66,15 @@ export default function MovieRecommender() {
         {messages.map((m, i) => (
           <div key={i} className={`mb-2 ${m.sender === 'user' ? 'text-right' : 'text-left'}`}>
             <span className={`sender-chat ${m.sender === 'user' ? 'bg-blue-200' : 'bg-gray-200'}`}>{m.text}</span>
+            {m.sender !== 'user' && "results" in m && (
+              <div className="mt-6 recomender-movies">
+                <ul>
+                  {m.results.map(movie => (
+                    <li key={movie.id} className="recomender-movies-list">🎬 {movie.title}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -78,17 +88,6 @@ export default function MovieRecommender() {
         />  
         <button onClick={handleSend} className="bg-blue-500 text-white px-4 py-2 rounded recomender-btn">Send</button>
       </div>
-
-      {recommendations.length > 0 && (
-        <div className="mt-6 recomender-movies">
-          <h2 className="text-lg font-semibold mb-2 mt-6 recomender-movies">Recommended Movies:</h2>
-          <ul>
-            {recommendations.map(movie => (
-              <li key={movie.id} className="recomender-movies-list">🎬 {movie.title}</li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 }
